@@ -17,15 +17,15 @@ export const ContextProvider = (props) => {
             .catch(err => err.message)
     }, []);
 
-    return (
-        <Context.Provider value={
-            {
-                pokemonData, setPokemonData
-            }
-        }>
-            {props.children}
-        </Context.Provider>
-    )
+    return
+    <Context.Provider value={
+        {
+            pokemonData, setPokemonData
+        }
+    }>
+        {props.children}
+    </Context.Provider>
+
 }
 
 export default ContextProvider;
