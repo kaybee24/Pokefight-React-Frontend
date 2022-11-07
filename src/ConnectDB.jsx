@@ -1,26 +1,26 @@
 import { useState, useEffect, createContext } from "react";
+import axios from "axios";
 
 export const ConnectDB = createContext();
 export const ContextProvider = (props) => {
     const [pokemonData, setPokemonData] = useState([]);
+    const [pokemonImages, setPokemonImages] = useState([]);
 
     useEffect(() => {
-        fetch(import.meta.env.VITE_HEROKU_API)
-            .then(res => {
-                if (res.ok)
-                    return res.json()
-            }).then(data => {
-                setPokemonData(data)
-                console.log(data)
-            }
-            )
+        const getPokeData = axios.get(import.meta.env.VITE_HEROKU_API)
+        const getPokeImages = axios.get(import.meta.env.VITE_POKE_API)
+            .then(axios.spread((...allData) => {
+                setPokemonData(allData[0].data)
+                setPokemonImages(allData[1].data)
+            }))
             .catch(err => err.message)
     }, []);
 
     return
     <Context.Provider value={
         {
-            pokemonData, setPokemonData
+            pokemonData, setPokemonData,
+            pokemonImages, setPokemonImages
         }
     }>
         {props.children}
