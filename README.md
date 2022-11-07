@@ -41,10 +41,15 @@ Each route will gather information from your API
  
 
 ### Additional Notes
-[] Card "Pokemon Detail View"
-[] Card "Instructions"
-[] Instructions in Navbar
-[] Search in Navbar
+[] Card
+    [] Card "Pokemon Detail View"
+    [] Card "Instructions"
+[] Navbar
+    [] Instructions in Navbar
+    [] Search in Navbar
+[] Slider
+[] Main
+    [] Performance
 
 
 ### PART III: Pokefight 
