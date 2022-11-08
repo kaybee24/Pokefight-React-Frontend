@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero.jsx';
 import Layout from './components/Layout.jsx';
 
-
 function App() {
   return (
     <Routes>
