@@ -1,0 +1,10 @@
+.wrestle-area {
+    background: none;
+    border: none;
+    border-radius: 18rem;
+    padding: 18rem;
+    transform: translateY(50%);
+    background-color: white;
+    opacity: .6;
+    cursor: pointer;
+  }
