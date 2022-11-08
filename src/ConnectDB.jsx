@@ -1,7 +1,8 @@
-import { useState, useEffect, createContext } from 'react';
-import axios from "axios";
+
+import { useState, useEffect, createContext } from "react";
 
 export const Context = createContext();
+
 export const ContextProvider = (props) => {
     const [pokemonData, setPokemonData] = useState([]);
     const [pokemonImages, setPokemonImages] = useState([]);
@@ -49,16 +50,19 @@ export const ContextProvider = (props) => {
             });
     }, []);
 
-
-    return <Context.Provider value={
-        {
-            pokemonData, setPokemonData,
-            pokemonImages, setPokemonImages
-        }
-    }>
-        {props.children}
-    </Context.Provider>
+    return (
+        <Context.Provider value={
+            {
+                pokemonData, setPokemonData,
+                pokemonImages, setPokemonImages
+            }
+        }>
+            {props.children}
+        </Context.Provider>
+    )
 
 }
 
+
 export default ContextProvider;
+
