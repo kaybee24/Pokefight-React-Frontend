@@ -1,14 +1,13 @@
 import { useContext } from 'react';
-import { ConnectDB } from '../ConnectDB.jsx';
+import { Context } from '../ConnectDB.jsx';
 
 const Hero = () => {
-    const { pokemonData, setPokemonData } = useContext(ConnectDB)
+    const { pokemonData, setPokemonData } = useContext(Context)
     console.log(pokemonData)
     return (
         <>
-        <div>Hello</div>
-            {pokemonData}
-            
+            <div>Hello</div>
+
         </>
     )
 }
