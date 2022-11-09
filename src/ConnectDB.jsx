@@ -1,3 +1,4 @@
+
 import { useState, useEffect, createContext } from "react";
 
 export const Context = createContext();
@@ -5,6 +6,7 @@ export const Context = createContext();
 export const ContextProvider = (props) => {
     const [pokemonData, setPokemonData] = useState([]);
     const [pokemonImages, setPokemonImages] = useState([]);
+
 
     useEffect(() => {
         fetch(import.meta.env.VITE_HEROKU_API)
@@ -17,11 +19,21 @@ export const ContextProvider = (props) => {
             });
         fetch(import.meta.env.VITE_POKE_API)
             .then(res => res.json())
-            .then(res => setPokemonImages(res.results))
+            .then(async (data) => {
+                try {
+                    const pokemons = data.results.map(async (e) => {
+                        const pokemon = await fetch(e.url)
+                            .then(res => res.json())
+                            .then(res => setPokemonImages(pokeData => [...pokeData, res]));
+                    })
+                }
+                catch { err => console.log(err) }
+            })
             .catch(err => {
                 console.log("Error", err);
             });
     }, []);
+
     return (
         <Context.Provider value={
             {
@@ -32,6 +44,7 @@ export const ContextProvider = (props) => {
             {props.children}
         </Context.Provider>
     )
+
 }
 
 
