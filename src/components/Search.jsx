@@ -1,4 +1,5 @@
 import React from 'react'
+import FilterButtons from "./Filter"
 
 export default function Search({text, setText, triggerSearch}){ 
     return (
@@ -30,7 +31,11 @@ export default function Search({text, setText, triggerSearch}){
         </>
       )
     }
-    
-    
+        <div className="form-control">
+            <FilterButtons />
+            <input type="text" placeholder="Search" className="bg-transparent outline-none border-b-[2px]" />
+        </div>
+    )
+}
 
 

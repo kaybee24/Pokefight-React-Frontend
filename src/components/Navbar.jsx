@@ -1,11 +1,16 @@
 import React from 'react';
 import Search from "./Search.jsx"
+import Search from './Search.jsx';
+import Theme from './Theme.jsx';
+
+
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100">
-            <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">Clash of the Pokemons</a>
+        <div className="navbar bg-slate-300 flex justify-between">
+            <div>
+                <a className="w-40"><img src="src/assets/Pokemon_logo.svg" /></a>
             </div>
+<<<<<<< HEAD
             <div className="flex-none gap-2">
                 <div className="form-control">
                     <input type="text" placeholder="Search2" className="input input-bordered" />
@@ -27,6 +32,11 @@ const Navbar = () => {
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
+=======
+            <div className="gap-2">
+                <Search />
+                <Theme />
+>>>>>>> 0b83df2f7e14d5c4f6764e427ebce2a3c439571b
             </div>
         </div>
     )
