@@ -35,7 +35,6 @@ export default function Search({text, setText, triggerSearch}){
             <FilterButtons />
             <input type="text" placeholder="Search" className="bg-transparent outline-none border-b-[2px]" />
         </div>
-    )
-}
+    
 
 
