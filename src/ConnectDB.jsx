@@ -7,31 +7,6 @@ export const ContextProvider = (props) => {
     const [pokemonData, setPokemonData] = useState([]);
     const [pokemonImages, setPokemonImages] = useState([]);
 
-    // useEffect(() => {
-    //     const getPokeData = axios.get(import.meta.env.VITE_HEROKU_API)
-    //     const getPokeImages = axios.get(import.meta.env.VITE_POKE_API)
-    //         .then(axios.spread((...allData) => {
-    //             console.log("allData", allData)
-    //             setPokemonData(allData[0].data)
-    //             setPokemonImages(allData[1].data)
-    //         }))
-    //         .catch(err => err.message)
-    // }, [])
-
-
-    // useEffect(() => {
-    //     Promise.all([
-    //         fetch(import.meta.env.VITE_HEROKU_API),
-    //         fetch(import.meta.env.VITE_POKE_API),
-    //     ])
-    //         .then(([res1, res2]) => {
-    //             setPokemonData(res1.json())
-    //             setPokemonImages(res2.json())
-    //         })
-    //         .catch(err => {
-    //             console.log("Error", err);
-    //         });
-    // }, []);
 
     useEffect(() => {
         fetch(import.meta.env.VITE_HEROKU_API)
@@ -44,7 +19,16 @@ export const ContextProvider = (props) => {
             });
         fetch(import.meta.env.VITE_POKE_API)
             .then(res => res.json())
-            .then(res => setPokemonImages(res.results))
+            .then(async (data) => {
+                try {
+                    const pokemons = data.results.map(async (e) => {
+                        const pokemon = await fetch(e.url)
+                            .then(res => res.json())
+                            .then(res => setPokemonImages(pokeData => [...pokeData, res]));
+                    })
+                }
+                catch { err => console.log(err) }
+            })
             .catch(err => {
                 console.log("Error", err);
             });

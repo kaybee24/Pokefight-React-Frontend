@@ -1,24 +1,43 @@
 import { useContext, useState } from 'react';
 import { Context } from '../ConnectDB';
 
-
 const Slider = () => {
     const { pokemonData, pokemonImages } = useContext(Context);
-    return (
-        <div className="carousel w-full">
-            <>
-                {pokemonData.map((e) => pokemonData.name && pokemonData.name
-                    (<div id="slide1" className="carousel-item relative w-full" >
-                        <img src="https://placeimg.com/800/200/arch" className="w-full" />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a href="#slide4" className="btn btn-circle">❮</a>
-                            <a href="#slide2" className="btn btn-circle">❯</a>
-                        </div>
-                    </div>)
 
-                )
-                }
-            </>
+    console.log("arrivedData", pokemonImages)
+    return (
+
+        <div className="w-full h-64 px-12 mt-10">
+            <div className="carousel h-full flex-wrap" width="3000px">
+                <div className="carousel-item relative h-10">
+                    {pokemonData.map((e) => e.id <= 202 &&
+                        (<div key={e.id} className="mx-5">
+                            <img src={`${pokemonImages[e.id - 1] && pokemonImages[e.id - 1].sprites.front_default}`} width="50px" />
+                        </div>)
+                    )}
+                </div>
+                <div className="carousel-item relative h-10">
+                    {pokemonData && pokemonData.map((e) => e.id >= 203 && e.id <= 404 &&
+                        (<div key={e.id} className="mx-5">
+                            <img src={`${pokemonImages[e.id - 1] && pokemonImages[e.id - 1].sprites.front_default}`} width="50px" />
+                        </div>)
+                    )}
+                </div>
+                <div className="carousel-item relative h-10">
+                    {pokemonData && pokemonData.map((e) => e.id >= 405 && e.id <= 606 &&
+                        (<div key={e.id} className="mx-5">
+                            <img src={`${pokemonImages[e.id - 1] && pokemonImages[e.id - 1].sprites.front_default}`} width="50px" />
+                        </div>)
+                    )}
+                </div>
+                <div className="carousel-item relative h-10">
+                    {pokemonData && pokemonData.map((e) => e.id >= 607 && e.id <= 808 &&
+                        (<div key={e.id} className="mx-5">
+                            <img src={`${pokemonImages[e.id - 1] && pokemonImages[e.id - 1].sprites.front_default}`} width="50px" />
+                        </div>)
+                    )}
+                </div>
+            </div >
         </div >
     )
 }
