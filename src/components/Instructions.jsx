@@ -8,7 +8,7 @@ const Instructions = () => {
         <>
             <button
                 onClick={() => setOpenModalInst(true)}
-                className="text-sm text-slate-300 absolute bottom-3 right-5">Instructions</button>
+                className="bg-slate-300 border-4 border-sky-600 text-sky-600 px-6 py-3 rounded-full cursor-pointer">Instructions</button>
             <ModalInstructions open={openModalInst} onClose={() => setOpenModalInst(false)} />
         </>
     )

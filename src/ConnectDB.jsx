@@ -1,11 +1,13 @@
 
 import { useState, useEffect, createContext } from "react";
+import Loader from './components/Loader.jsx'
 
 export const Context = createContext();
 
 export const ContextProvider = (props) => {
     const [pokemonData, setPokemonData] = useState([]);
     const [pokemonImages, setPokemonImages] = useState([]);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -24,7 +26,10 @@ export const ContextProvider = (props) => {
                     const pokemons = data.results.map(async (e) => {
                         const pokemon = await fetch(e.url)
                             .then(res => res.json())
-                            .then(res => setPokemonImages(pokeData => [...pokeData, res]));
+                            .then(res => {
+                                setPokemonImages(pokeData => [...pokeData, res]);
+                            })
+                            .then(setLoading(false));
                     })
                 }
                 catch { err => console.log(err) }
@@ -38,10 +43,14 @@ export const ContextProvider = (props) => {
         <Context.Provider value={
             {
                 pokemonData, setPokemonData,
-                pokemonImages, setPokemonImages
+                pokemonImages, setPokemonImages,
+                loading, setLoading
             }
         }>
-            {props.children}
+            {loading ?
+                <Loader />
+                :
+                props.children}
         </Context.Provider>
     )
 
