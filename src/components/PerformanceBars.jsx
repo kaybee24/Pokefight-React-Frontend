@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { Context } from '../ConnectDB';
+import { AppContext } from '../ConnectDB';
 
 
 const PerformanceBars = () => {
-    const { pokemonData, pokemonImages } = useContext(Context);
+    const { pokemonData, pokemonImages } = useContext(AppContext);
     const pokemonRandom = () => {
         const min = Math.ceil(1)
         const max = Math.floor(800)
