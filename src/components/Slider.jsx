@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { AppContext } from '../ConnectDB';
+import './Slider.css'
 
 const Slider = () => {
 
@@ -15,29 +16,26 @@ const Slider = () => {
     console.log("arrivedData", pokemonImages)
     return (
 
+        <div className="h-80 px-32 mt-10 mx-auto w-full flex flex-wrap justify-center">
 
-        <div className="w-full h-80 px-12 mt-10">
-            <div className="carousel h-full w-full">
-                <div className="carousel-item h-10 flex-wrap">
-                    {pokemonData
-                        // .slice(sliderPage * pokemonPerSlide, pokemonPerSlide)
-                        // .filter(pok => pok.type === pokemonFilters.type)
-                        // .filter(pok => pok.name.includes(pokemonFilters.search))
-                        .map((pok) => (
-                            <div key={pok.id} className="mx-5">
-                                <img src={`${pokemonImages[pok.id - 1] && pokemonImages[pok.id - 1].sprites.front_default ? pokemonImages[pok.id - 1].sprites.front_default : ""}`} width="100px" />
-                            </div>)
-                        )}
-                </div>
+            {pokemonData
+                // .slice(sliderPage * pokemonPerSlide, pokemonPerSlide)
+                // .filter(pok => pok.type === pokemonFilters.type)
+                // .filter(pok => pok.name.includes(pokemonFilters.search))
+                .map((pok) => (pokemonImages[pok.id - 1] &&
+                    <div key={pok.id} className="m-5 pokemonGalleryItem rounded-full">
+                        <img src={`${pokemonImages[pok.id - 1].sprites.front_default}`} width="200px" />
+                    </div>)
+                )}
+            <div className="absolute flex justify-between left-16 right-16 top-96">
+                <button className="btn btn-circle btn-outline p-12" onClick={() => setSliderPage(sliderPage - 1)} >
+                    ❮
+                </button>
+                <button className="btn btn-circle btn-outline p-12" onClick={() => setSliderPage(sliderPage + 1)} >
+                    ❯
+                </button>
+            </div>
 
-            </div >
-            <h1>sliderPage:{sliderPage}</h1>
-            <button onClick={() => setSliderPage(sliderPage - 1)} >
-                <h2>Previous</h2>
-            </button>
-            <button onClick={() => setSliderPage(sliderPage + 1)} >
-                <h2>Next</h2>
-            </button>
         </div >
     )
 }
