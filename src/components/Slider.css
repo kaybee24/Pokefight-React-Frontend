@@ -1,0 +1,9 @@
+.pokemonGalleryItem {
+    background: #c7c6c680;
+    /* border-radius: 50px; */
+}
+
+.btn {
+    font-size: 2rem;
+    line-height: 0;
+}

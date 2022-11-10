@@ -23,26 +23,24 @@ export const ContextProvider = (props) => {
     // the "pagination useEffect"
     useEffect(() => {
         setPokemonImages([]);
-        // function get14PokemonsWorthOfImages() {
-        setLoading(true)
-        pokemonFromPokeAPI
-            .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
-            .map(async (e) => {
-                console.log("Databerforeslicefetching", e)
-                const pokemon = await fetch(e.url)
-                    .then(res => res.json())
-                    .then(res => {
-                        setPokemonImages(pokeData => [...pokeData, res]);
-                        console.log("pokemonImagesafterslicing", pokemonImages)
-                    })
-            })
-        setLoading(false)
-        // .then(() => setLoading(false))
-        //}
-        // Promise.all(get14PokemonsWorthOfImages())
-        //     .then(allThoseResults => setPokemonImages(allThoseResults))
-        //     .then(() => setLoading(false))
+        setLoading(true);
+        Promise.all(
+            pokemonFromPokeAPI
+                .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
+                .map(async (e) => {
+                    console.log("Databerforeslicefetching", e)
+                    const pokemon = await fetch(e.url)
+                        .then(res => res.json())
+                        .then(res => {
+                            setPokemonImages(pokeData => [...pokeData, res]);
+                            console.log("pokemonImagesafterslicing", pokemonImages)
+                        })
+                })
+        )
+            .then(() => setLoading(false))
     }, [sliderPage]);
+
+
 
 
     useEffect(() => {
@@ -93,7 +91,6 @@ export const ContextProvider = (props) => {
     return (
         <AppContext.Provider value={
             {
-
                 sliderPage,
                 setSliderPage,
                 pokemonPerSlide,
@@ -107,6 +104,7 @@ export const ContextProvider = (props) => {
                 loading, setLoading
             }
         }>
+
             {loading ?
                 <Loader />
                 :
