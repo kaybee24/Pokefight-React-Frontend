@@ -12,6 +12,9 @@ export const ContextProvider = (props) => {
         type: "none",
         search: ""
     });
+    const [pokemonSearch, setPokemonSearch] = useState({
+        search: ""
+    });
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [sliderPage, setSliderPage] = useState(0);
     const [pokemonPerSlide, setPokemonPerSlide] = useState(14);
@@ -23,26 +26,41 @@ export const ContextProvider = (props) => {
     // the "pagination useEffect"
     useEffect(() => {
         setPokemonImages([]);
-        // function get14PokemonsWorthOfImages() {
+        setLoading(true);
+        Promise.all(
+            pokemonFromPokeAPI
+                .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
+                .map(async (e) => {
+                    console.log("Databerforeslicefetching", e)
+                    const pokemon = await fetch(e.url)
+                        .then(res => res.json())
+                        .then(res => {
+                            setPokemonImages(pokeData => [...pokeData, res]);
+                            console.log("pokemonImagesafterslicing", pokemonImages)
+                        })
+                })
+        )
+            .then(() => setLoading(false))
+    }, [sliderPage]);
+
+    useEffect(() => {
+        setPokemonImages([]);
         setLoading(true)
+        console.log("newType", pokemonFilters.type)
         pokemonFromPokeAPI
-            .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
+            .filter(e => e.types[0].type.name == pokemonFilters.type || e.types[1].type.name == pokemonFilters.type)
             .map(async (e) => {
-                console.log("Databerforeslicefetching", e)
                 const pokemon = await fetch(e.url)
                     .then(res => res.json())
                     .then(res => {
                         setPokemonImages(pokeData => [...pokeData, res]);
-                        console.log("pokemonImagesafterslicing", pokemonImages)
+                        console.log("pokemonimagesafterfiltering", pokemonImages)
                     })
             })
         setLoading(false)
-        // .then(() => setLoading(false))
-        //}
-        // Promise.all(get14PokemonsWorthOfImages())
-        //     .then(allThoseResults => setPokemonImages(allThoseResults))
-        //     .then(() => setLoading(false))
-    }, [sliderPage]);
+    }, [pokemonFilters]);
+
+
 
 
     useEffect(() => {
@@ -88,18 +106,20 @@ export const ContextProvider = (props) => {
         pokemonFromPokeAPI,
         pokemonImages,
         pokemonFilters,
+        pokemonSearch,
         backgroundImage]);
 
     return (
         <AppContext.Provider value={
             {
-
                 sliderPage,
                 setSliderPage,
                 pokemonPerSlide,
                 setPokemonPerSlide,
                 pokemonFilters,
                 setPokemonFilters,
+                pokemonSearch,
+                setPokemonSearch,
                 backgroundImage,
                 setBackgroundImage,
                 pokemonData, setPokemonData,
@@ -107,6 +127,7 @@ export const ContextProvider = (props) => {
                 loading, setLoading
             }
         }>
+
             {loading ?
                 <Loader />
                 :

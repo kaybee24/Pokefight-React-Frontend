@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from "./Search.jsx";
 import Theme from './Theme.jsx';
+import FilterButtons from './Filter.jsx';
 
 
 const Navbar = () => {
@@ -31,8 +32,10 @@ const Navbar = () => {
                     </ul>
                 </div>
             <div className="gap-2">
-                <Search />
-                <Theme />
+                    <Search />
+                    <FilterButtons />
+                    <Theme />
+                    
             </div>
             </div>
         </div>
