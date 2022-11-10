@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Context } from '../ConnectDB.jsx';
+import { AppContext } from '../ConnectDB.jsx';
 import './Hero.css';
 //import Instructions from './Instructions.jsx';
 import PerformanceBars from './PerformanceBars.jsx';
@@ -7,7 +7,7 @@ import ButtonRumble from './ButtonRumble.jsx';
 import Instructions from './Instructions.jsx';
 
 const Hero = () => {
-    const { pokemonData, setPokemonData, pokemonImages, setPokemonImages } = useContext(Context)
+    const { pokemonData, setPokemonData, pokemonImages, setPokemonImages } = useContext(AppContext)
 
 
     return (

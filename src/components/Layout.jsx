@@ -4,11 +4,11 @@ import Navbar from './Navbar.jsx';
 import Slider from './Slider.jsx';
 import Instructions from './Instructions.jsx';
 import Loader from './Loader.jsx'
-import { Context } from '../ConnectDB.jsx';
+import { AppContext } from '../ConnectDB.jsx';
 
 const Layout = () => {
 
-    const { loading } = useState(Context)
+    const { loading } = useState(AppContext)
 
     return (
         <>
