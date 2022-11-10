@@ -45,8 +45,6 @@ export const ContextProvider = (props) => {
     }, [sliderPage]);
 
 
-
-
     useEffect(() => {
         fetch(import.meta.env.VITE_HEROKU_API)
             .then(res => res.json())
@@ -95,6 +93,7 @@ export const ContextProvider = (props) => {
     return (
         <AppContext.Provider value={
             {
+
                 sliderPage,
                 setSliderPage,
                 pokemonPerSlide,
@@ -108,7 +107,6 @@ export const ContextProvider = (props) => {
                 loading, setLoading
             }
         }>
-
             {loading ?
                 <Loader />
                 :

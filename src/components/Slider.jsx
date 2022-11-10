@@ -2,7 +2,9 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../ConnectDB';
 
 const Slider = () => {
+
     const { pokemonData, pokemonImages, pokemonFilters, sliderPage, setSliderPage, pokemonPerSlide } = useContext(AppContext);
+
 
     // const pokemonImagesLocal = localstorage.key('pokemon');
     // console.log("Pokemons at localStorage", pokemonImagesLocal)
@@ -12,6 +14,7 @@ const Slider = () => {
     // slider file just receives n pokemon and allow user to push prev/next
     console.log("arrivedData", pokemonImages)
     return (
+
 
         <div className="w-full h-80 px-12 mt-10">
             <div className="carousel h-full w-full">
