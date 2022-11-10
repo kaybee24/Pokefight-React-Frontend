@@ -7,6 +7,7 @@ import Layout from './components/Layout.jsx';
 function App() {
 
   return (
+
     <div className="background-el" style={{backgroundImage:"src()"}}>
     <BrowserRouter>
       <Routes>
