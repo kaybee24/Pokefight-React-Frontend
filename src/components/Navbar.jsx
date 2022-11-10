@@ -31,12 +31,11 @@ const Navbar = () => {
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
-            <div className="gap-2">
+                <div className="gap-2">
                     <Search />
                     <FilterButtons />
-                    <Theme />
-                    
-            </div>
+
+                </div>
             </div>
         </div>
     )
