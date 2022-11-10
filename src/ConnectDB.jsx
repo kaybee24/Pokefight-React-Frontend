@@ -12,6 +12,9 @@ export const ContextProvider = (props) => {
         type: "none",
         search: ""
     });
+    const [pokemonSearch, setPokemonSearch] = useState({
+        search: ""
+    });
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [sliderPage, setSliderPage] = useState(0);
     const [pokemonPerSlide, setPokemonPerSlide] = useState(14);
@@ -43,6 +46,23 @@ export const ContextProvider = (props) => {
         //     .then(allThoseResults => setPokemonImages(allThoseResults))
         //     .then(() => setLoading(false))
     }, [sliderPage]);
+
+    useEffect(() => {
+        setPokemonImages([]);
+        setLoading(true)
+        console.log("newType", pokemonFilters.type)
+        pokemonFromPokeAPI
+            .filter(e => e.types[0].type.name == pokemonFilters.type || e.types[1].type.name == pokemonFilters.type)
+            .map(async (e) => {
+                const pokemon = await fetch(e.url)
+                    .then(res => res.json())
+                    .then(res => {
+                        setPokemonImages(pokeData => [...pokeData, res]);
+                        console.log("pokemonimagesafterfiltering", pokemonImages)
+                    })
+            })
+        setLoading(false)
+    }, [pokemonFilters]);
 
 
     useEffect(() => {
@@ -88,6 +108,7 @@ export const ContextProvider = (props) => {
         pokemonFromPokeAPI,
         pokemonImages,
         pokemonFilters,
+        pokemonSearch,
         backgroundImage]);
 
     return (
@@ -100,6 +121,8 @@ export const ContextProvider = (props) => {
                 setPokemonPerSlide,
                 pokemonFilters,
                 setPokemonFilters,
+                pokemonSearch,
+                setPokemonSearch,
                 backgroundImage,
                 setBackgroundImage,
                 pokemonData, setPokemonData,
