@@ -1,4 +1,5 @@
 import React from 'react';
+import Theme from './Theme';
 
 const ModalInstructions = () => {
     /*     if (!open) return null
@@ -14,6 +15,8 @@ const ModalInstructions = () => {
                     <p className="py-4">Computer chooses a random character</p>
                     <p className="py-4">Select the performance category next to your pokemon</p>
                     <p className="py-4">Choose a theme</p>
+                    <Theme />
+
                 </div>
             </div>
         </>
