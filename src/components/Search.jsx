@@ -5,9 +5,6 @@ export default function Search({text, setText, triggerSearch}){
     return (
         <>
           <header>
-            <div>
-              <h1> Pokemon Search </h1>
-            </div>  
             <div className="search-container">
               <form className="example" onSubmit={
                 (event) => {
@@ -16,14 +13,14 @@ export default function Search({text, setText, triggerSearch}){
                   triggerSearch();
                 }
               }> 
-                <input id='search__input' value={text} type="text" placeholder="Pokemon Search°" name="search" 
+                <input id='search__input' value={text} type="text" placeholder="Pokemon Search" name="search" 
                 style={{padding:10}}
                 onChange={
                   (e)=>setText(e.target.value)
                 }
                 />   
                 <button type="submit"> 
-                  <i className="search">Search</i>
+                  <i className="search"></i>
                 </button>
               </form>
             </div>
