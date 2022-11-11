@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './Theme.css';
+import { AppContext } from '../ConnectDB';
 
 const Theme = () => {
 
@@ -9,14 +10,14 @@ const Theme = () => {
         { id: 2, value: "src/assets/bg_glacier.jpg" },
         { id: 3, value: "src/assets/bg_volcano.jpg" },
     ]
-    const [bgImage, setbgImage] = useState(imgs[0])
+    const { bgImage, setBgImage } = useContext(AppContext)
 
     const handleClick = (index) => {
         const selectImage = imgs[index];
-        setbgImage(selectImage)
+        setBgImage(selectImage)
     }
     return (
-        <div className="background-el" style={{ backgroundImage: `url(${bgImage.value})` }}>
+        <div>
             <div className='flex'>
                 {imgs.map((data, index) =>
                     <div className="thumbnail" key={index} >

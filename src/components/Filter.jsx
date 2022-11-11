@@ -9,9 +9,9 @@ export default function FilterButtons() {
         setPokemonFilters(prev => ({ ...prev, type: newType }))
     }
 
-    function resetTrigger() {
-        setReset(true)
-    }
+    // function resetTrigger() {
+    //     setReset(prev => prev + 1)
+    // }
 
 
     return (
@@ -20,7 +20,7 @@ export default function FilterButtons() {
             </label>
             <ul className="dropdown-content">
                 {filterablePokemonTypes.map(type => <li><button key={type} onClick={() => updateType(type)}>{type}</button></li>)}
-                <li><button onClick={resetTrigger()}>reset Filter</button></li>
+                {/* <li><button onClick={resetTrigger()}>reset Filter</button></li> */}
             </ul>
         </div>
     )
