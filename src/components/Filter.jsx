@@ -16,8 +16,7 @@ export default function FilterButtons() {
 
     return (
         <div className="dropdown">
-            <label tabIndex={0} className="btn">
-                <div className="menu">Filter</div>
+            <label tabIndex={0} className="btn">Filter
             </label>
             <ul className="dropdown-content">
                 {filterablePokemonTypes.map(type => <li><button key={type} onClick={() => updateType(type)}>{type}</button></li>)}
