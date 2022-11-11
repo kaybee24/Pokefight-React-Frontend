@@ -17,8 +17,9 @@ const Hero = () => {
     return (
         <>
             <div className='grid grid-cols-3 absolute bottom-0'>
-                <PerformanceUserPoke />
-
+                <div className="ml-6 mt-20">
+                    <PerformanceUserPoke />
+                </div>
                 <div className='flex justify-center'>
                     <div className='wrestle-area'></div>
                     <div className="grid gap-2 absolute bottom-8">
@@ -30,7 +31,9 @@ const Hero = () => {
                         <div id="pokeRival" className="rounded-full bg-slate-300 border-white border-8 p-14"><button>{pokemonRandom()}</button></div>
                     </div>
                 </div>
-                <PerformanceUserPoke />
+                <div className="absolute right-6 mt-20">
+                    <PerformanceUserPoke />
+                </div>
             </div>
         </>
     )
