@@ -11,7 +11,9 @@ const Navbar = () => {
                 <a className="w-40"><img src="src/assets/Pokemon_logo.svg" /></a>
             </div>
             <div className="flex-none gap-2">
+
                 <Searchbar />
+
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
@@ -33,6 +35,7 @@ const Navbar = () => {
 
                     <FilterButtons />
                     <Theme />
+
 
                 </div>
             </div>

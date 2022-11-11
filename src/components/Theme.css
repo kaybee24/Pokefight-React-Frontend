@@ -1,0 +1,24 @@
+
+.flex{
+    justify-content: center;
+    display: flex;
+    padding-top: 20px;
+  }
+  
+  .thumbnail{
+    padding-left: 20px;
+  }
+  
+  .thumbnail img{
+      border-radius: 50%;
+      height: 80px; 
+      width:80px;
+      cursor: pointer;
+    }
+
+    .background-el {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+      }

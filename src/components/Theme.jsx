@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react';
+import './Theme.css';
 
 const Theme = () => {
-    const handleOnClick = () => {
-        document.body.style.backgroundImage = "url('src/assets/bg_forest.jpg')"
+
+    const imgs = [
+        { id: 0, value: "src/assets/bg_cave.jpg" },
+        { id: 1, value: "src/assets/bg_forest.jpg" },
+        { id: 2, value: "src/assets/bg_glacier.jpg" },
+        { id: 3, value: "src/assets/bg_volcano.jpg" },
+    ]
+    const [bgImage, setbgImage] = useState(imgs[0])
+
+    const handleClick = (index) => {
+        const selectImage = imgs[index];
+        setbgImage(selectImage)
     }
     return (
-        <div className="dropdown dropdown-end">
-            <label tabIndex={0} id="theme-toggle" className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full"><img src="src/assets/bg_cave.jpg" /></div>
-            </label>
-            <ul tabIndex={0} className="shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-40">
-                <li><a onClick={() => handleOnClick()} className="justify-between"><img className="rounded-full" src="src/assets/bg_forest.jpg" /></a></li>
-                <li><a onClick={() => handleOnClick()}><img className="rounded-full" src="src/assets/bg_volcano.jpg" /></a></li>
-                <li><a onClick={() => handleOnClick()}><img className="rounded-full" src="src/assets/bg_glacier.jpg" /></a></li>
-            </ul>
-        </div>
-    )
+        <div className="background-el" style={{ backgroundImage: `url(${bgImage.value})` }}>
+            <div className='flex'>
+                {imgs.map((data, index) =>
+                    <div className="thumbnail" key={index} >
+                        <img
+                            className={bgImage.id === index ? "clicked" : ""}
+                            src={data.value}
+                            onClick={() => handleClick(index)} />
+                    </div>
+                )}
+            </div>
+        </div >
+    );
 }
 
-export default Theme
+export default Theme;
