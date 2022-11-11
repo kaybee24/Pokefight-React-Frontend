@@ -3,7 +3,7 @@ import { AppContext } from '../ConnectDB';
 
 
 const PerformanceBars = () => {
-    const { pokemonData, pokemonImages } = useContext(AppContext);
+    const { pokemonImages } = useContext(AppContext);
     const pokemonRandom = () => {
         const min = Math.ceil(1)
         const max = Math.floor(800)
