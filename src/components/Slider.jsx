@@ -4,7 +4,7 @@ import './Slider.css'
 
 const Slider = () => {
 
-    const { pokemonData, pokemonImages, pokemonFilters, sliderPage, setSliderPage, pokemonPerSlide } = useContext(AppContext);
+    const { pokemonData, pokemonImages, pokemonImageSelection, setPokemonImageSelection, pokemonFilters, sliderPage, setSliderPage, pokemonPerSlide } = useContext(AppContext);
 
 
     // const pokemonImagesLocal = localstorage.key('pokemon');
@@ -16,15 +16,15 @@ const Slider = () => {
     console.log("arrivedData", pokemonImages)
     return (
 
-        <div className="h-80 px-32 mt-10 mx-auto w-full flex flex-wrap justify-center">
+        <div className="px-32 mt-40 pt-10 mx-auto w-full flex flex-wrap justify-center">
 
             {pokemonData
                 // .slice(sliderPage * pokemonPerSlide, pokemonPerSlide)
                 // .filter(pok => pok.type === pokemonFilters.type)
                 // .filter(pok => pok.name.includes(pokemonFilters.search))
-                .map((pok) => (pokemonImages[pok.id - 1] &&
+                .map((pok) => (pokemonImageSelection[pok.id - 1] &&
                     <div key={pok.id} className="m-5 pokemonGalleryItem rounded-full">
-                        <img src={`${pokemonImages[pok.id - 1].sprites.front_default}`} width="200px" />
+                        <img src={`${pokemonImageSelection[pok.id - 1].sprites.front_default}`} width="200px" />
                     </div>)
                 )}
             <div className="absolute flex justify-between left-16 right-16 top-96">
@@ -35,7 +35,6 @@ const Slider = () => {
                     ❯
                 </button>
             </div>
-
         </div >
     )
 }

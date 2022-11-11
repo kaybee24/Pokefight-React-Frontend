@@ -1,20 +1,20 @@
-
-import React from 'react'
-import FilterButtons from "./Filter"
-
-        
-export const searchPokemonTypes = [""]
 import { AppContext } from "../ConnectDB"
-import { useContext } from "react"
+import { useContext, useState } from "react"
+
 export default function Searchbar() {
-    const { pokemonSearch, setPokemonSearch } = useContext(AppContext)
-    function updateType(newType) {
-        setPokemonSearch(prev => ({ ...prev, type: newType }))
+    const { pokemonFilters, setPokemonFilters } = useContext(AppContext)
+
+    function updateSearch(event) {
+        setPokemonFilters(prev => ({ ...prev, search: event.target.value }))
+        console.log("pokemonFilters", pokemonFilters)
     }
+
     return (<div>
-        {searchPokemonTypes.map(type => <button key={type} onClick={() => updateType(type)}>{type}</button>)}
+        <div className="form-control">
+            <input onChange={updateSearch} type="text" placeholder="Search for Pokemons" className="input input-bordered" />
+        </div>
     </div>)
 }
-    
+
 
 

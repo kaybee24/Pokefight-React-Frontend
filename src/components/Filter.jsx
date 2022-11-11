@@ -2,19 +2,28 @@ export const filterablePokemonTypes = ["Normal", "Fire", "Water", "Grass", "Elec
 import { AppContext } from "../ConnectDB"
 import { useContext } from "react"
 export default function FilterButtons() {
-    const { pokemonFilters, setPokemonFilters } = useContext(AppContext)
+
+    const { pokemonFilters, setPokemonFilters, setReset } = useContext(AppContext)
+
     function updateType(newType) {
         setPokemonFilters(prev => ({ ...prev, type: newType }))
     }
+
+    function resetTrigger() {
+        setReset(true)
+    }
+
+
     return (
         <div className="dropdown">
             <label tabIndex={0} className="btn">
                 <div className="menu">Filter</div>
             </label>
-            <ul className="dropdown-content">  
-        {filterablePokemonTypes.map(type => <button key={type} onClick={() => updateType(type)}>{type}</button>)}
+            <ul className="dropdown-content">
+                {filterablePokemonTypes.map(type => <li><button key={type} onClick={() => updateType(type)}>{type}</button></li>)}
+                <li><button onClick={resetTrigger()}>reset Filter</button></li>
             </ul>
-            </div>
-        )
+        </div>
+    )
 }
 

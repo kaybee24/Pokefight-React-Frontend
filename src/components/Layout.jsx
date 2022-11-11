@@ -12,15 +12,11 @@ const Layout = () => {
 
     return (
         <>
-            {loading ?
-                <Loader />
-                :
-                <>
-                    <Navbar />
-                    <Slider />
-                    <Outlet />
-                </>
-            }
+
+            <Navbar />
+            <Slider />
+            <Outlet />
+
         </>
     )
 }
