@@ -9,11 +9,10 @@ export default function Searchbar() {
         console.log("pokemonFilters", pokemonFilters)
     }
 
-    return (<div>
-        <div className="form-control">
-            <input onChange={updateSearch} type="text" placeholder="Search for Pokemons" className="input input-bordered" />
-        </div>
-    </div>)
+    return (
+        <input onChange={updateSearch} type="text" placeholder="Search for Pokemons" className="bg-transparent outline-none border-b-[2px] text-center" />
+
+    )
 }
 
 

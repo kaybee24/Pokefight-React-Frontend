@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ModalInstructions from './ModalInstructions.jsx';
 
-const Instructions = () => {
+const ButtonInstructions = () => {
 
     return (
         <>
@@ -14,5 +14,5 @@ const Instructions = () => {
     )
 }
 
-export default Instructions
+export default ButtonInstructions
 
