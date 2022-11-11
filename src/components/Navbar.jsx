@@ -34,7 +34,6 @@ const Navbar = () => {
                 <div className="gap-2">
 
                     <FilterButtons />
-                    <Theme />
 
 
                 </div>

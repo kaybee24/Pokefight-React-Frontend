@@ -16,8 +16,7 @@ const Slider = () => {
     console.log("arrivedData", pokemonImages)
     return (
 
-        <div className="px-32 mt-40 pt-10 mx-auto w-full flex flex-wrap justify-center">
-
+        <div className="h-[32rem] overflow-scroll px-32 mt-40 pt-10 mx-auto w-full flex flex-wrap justify-center">
             {pokemonData
                 // .slice(sliderPage * pokemonPerSlide, pokemonPerSlide)
                 // .filter(pok => pok.type === pokemonFilters.type)

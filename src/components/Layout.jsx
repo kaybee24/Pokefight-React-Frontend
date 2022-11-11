@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import Slider from './Slider.jsx';
@@ -8,15 +8,18 @@ import { AppContext } from '../ConnectDB.jsx';
 
 const Layout = () => {
 
-    const { loading } = useState(AppContext)
+
+    const { loading, bgImage } = useContext(AppContext)
 
     return (
         <>
+            {/* <div className="background-el" style={{ backgroundImage: `url(${bgImage.value})` }}> */}
 
             <Navbar />
             <Slider />
             <Outlet />
 
+            {/* </div> */}
         </>
     )
 }

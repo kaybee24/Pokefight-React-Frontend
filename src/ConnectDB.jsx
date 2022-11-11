@@ -16,8 +16,8 @@ export const ContextProvider = (props) => {
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [sliderPage, setSliderPage] = useState(0);
     const [pokemonPerSlide, setPokemonPerSlide] = useState(14);
-    const [reset, setReset] = useState();
-
+    const [reset, setReset] = useState(0);
+    const [bgImage, setBgImage] = useState({ id: 0, value: "src/assets/bg_cave.jpg" });
 
 
     //INITIAL UseEffect on PageLoad
@@ -110,6 +110,15 @@ export const ContextProvider = (props) => {
         setLoading(false)
     }, [pokemonFilters.type]);
 
+    // useEffect(() => {
+    //     setPokemonImageSelection([]);
+    //     setLoading(true)
+    //     pokemonImages
+    //         .map(async (e) => {
+    //             setPokemonImageSelection(pokeData => [...pokeData, e])
+    //         })
+    //     setLoading(false)
+    // }, []);
 
     useEffect(() => {
         setPokemonImageSelection([]);
@@ -131,7 +140,9 @@ export const ContextProvider = (props) => {
             pokemonImages,
             pokemonImageSelection,
             pokemonFilters,
-            backgroundImage
+            backgroundImage,
+            bgImage,
+            reset
         })
     }, [
         pokemonData,
@@ -139,7 +150,9 @@ export const ContextProvider = (props) => {
         pokemonImages,
         pokemonImageSelection,
         pokemonFilters,
-        backgroundImage]);
+        backgroundImage,
+        bgImage,
+        reset]);
 
     return (
         <AppContext.Provider value={
@@ -156,7 +169,8 @@ export const ContextProvider = (props) => {
                 pokemonImages, setPokemonImages,
                 pokemonImageSelection, setPokemonImageSelection,
                 loading, setLoading,
-                reset, setReset
+                reset, setReset,
+                bgImage, setBgImage
             }
         }>
 

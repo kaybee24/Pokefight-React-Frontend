@@ -7,7 +7,7 @@ import ButtonRumble from './ButtonRumble.jsx';
 import Instructions from './Instructions.jsx';
 
 const Hero = () => {
-    const { pokemonData, setPokemonData, pokemonImages, setPokemonImages } = useContext(AppContext)
+    const { pokemonImages, setPokemonImages } = useContext(AppContext)
 
 
     return (
