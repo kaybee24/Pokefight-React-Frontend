@@ -15,7 +15,7 @@ const Slider = () => {
     // slider file just receives n pokemon and allow user to push prev/next
     console.log("arrivedData", pokemonImages)
     return (
-        <div className='h-[32rem] overflow-hidden'>
+        <div className='h-[24rem] overflow-hidden'>
             <div className="px-32 pt-10 mx-auto w-full flex flex-wrap justify-center">
 
                 {pokemonData
@@ -24,10 +24,10 @@ const Slider = () => {
                     // .filter(pok => pok.name.includes(pokemonFilters.search))
                     .map((pok) => (pokemonImageSelection[pok.id - 1] &&
                         <div key={pok.id} className="m-5 pokemonGalleryItem rounded-full">
-                            <img src={`${pokemonImageSelection[pok.id - 1].sprites.front_default}`} width="200px" />
+                            <img src={`${pokemonImageSelection[pok.id - 1].sprites.front_default}`} width="130px" />
                         </div>)
                     )}
-                <div className="absolute flex justify-between left-16 right-16 top-96">
+                <div className="absolute flex justify-between left-16 right-16 top-[14rem]">
                     <button className="btn btn-circle btn-outline p-12" onClick={() => setSliderPage(sliderPage - 1)} >
                         ❮
                     </button>
