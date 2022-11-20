@@ -3,7 +3,7 @@ import { AppContext } from '../ConnectDB';
 import './PerformanceBars.css'
 
 const PerformanceBars = ({ done }) => {
-    const { pokemonData, pokemonImages } = useContext(AppContext);
+    const { pokemonData, pokemonDetailsAll } = useContext(AppContext);
     const [style, setStyle] = useState({});
 
     setTimeout(() => {

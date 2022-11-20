@@ -6,14 +6,15 @@ export const AppContext = createContext();
 export const ContextProvider = (props) => {
     const [pokemonFromPokeAPI, setPokemonFromPokeAPI] = useState([])
     const [pokemonData, setPokemonData] = useState([]);
-    const [pokemonImages, setPokemonImages] = useState([]);
-    const [pokemonImageSelection, setPokemonImageSelection] = useState([]);
+    const [pokemonDetailsAll, setPokemonDetailsAll] = useState([]);
+    const [pokemonDetailsFilter, setPokemonDetailsFilter] = useState([])
+    const [pokemonSliderSelection, setPokemonSliderSelection] = useState([]);
     const [loading, setLoading] = useState(true);
     const [pokemonFilters, setPokemonFilters] = useState({
         type: "none",
         search: ""
     });
-    const [backgroundImage, setBackgroundImage] = useState([]);
+    // const [backgroundImage, setBackgroundImage] = useState([]);
     const [sliderPage, setSliderPage] = useState(0);
     const [pokemonPerSlide, setPokemonPerSlide] = useState(14);
     const [reset, setReset] = useState(0);
@@ -39,7 +40,8 @@ export const ContextProvider = (props) => {
                         const pokemon = await fetch(e.url) // individual pokemon pictures
                             .then(res => res.json())
                             .then(res => {
-                                setPokemonImages(pokeData => [...pokeData, res]); // 800+ times updates // localStorage.setItem("pokemon", res)
+                                setPokemonDetailsAll(pokeData => [...pokeData, res]); // 800+ times updates // localStorage.setItem("pokemon", res)
+                                setPokemonDetailsFilter((pokeData => [...pokeData, res]))
                                 // localStorage.setItem("PokeApiData", res)
                             })
                     })
@@ -53,82 +55,80 @@ export const ContextProvider = (props) => {
             .then(setReset(false));
     }, []);
 
-    // // the "pagination useEffect"
-    // useEffect(() => {
-    //     setPokemonImages([]);
-    //     setLoading(true);
-    //     Promise.all(
-    //         pokemonFromPokeAPI
-    //             .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
-    //             .map(async (e) => {
-    //                 console.log("Databerforeslicefetching", e)
-    //                 const pokemon = await fetch(e.url)
-    //                     .then(res => res.json())
-    //                     .then(res => {
-    //                         setPokemonImages(pokeData => [...pokeData, res]);
-    //                         console.log("pokemonImagesafterslicing", pokemonImages)
-    //                     })
-    //             })
-    //     )
-    //         .then(() => setLoading(false))
-    // }, [sliderPage]);
 
+    // // the "pagination useEffect"
     //sets the Intital Data of 809 Pokemons to 14 for Slider
     useEffect(() => {
         setLoading(true)
-        setPokemonImageSelection(pokemonImages.slice(0, 14))
+        setPokemonSliderSelection(pokemonDetailsFilter.slice(0, 14))
         setLoading(false)
-    }, [pokemonImages])
+    }, [pokemonDetailsFilter])
 
     // the "pagination useEffect" / sets next 14 Images for slider after button next gets clicked
     useEffect(() => {
-        setPokemonImageSelection([]);
+        setPokemonSliderSelection([]);
         setLoading(true);
         Promise.all(
-            pokemonImages
+            pokemonDetailsFilter
                 .slice(sliderPage * pokemonPerSlide, sliderPage * pokemonPerSlide + pokemonPerSlide)
                 .map(async (e) => {
-                    setPokemonImageSelection(pokeData => [...pokeData, e]);
+                    setPokemonSliderSelection(pokeData => [...pokeData, e]);
                 })
         )
             .then(() => setLoading(false))
     }, [sliderPage]);
 
-    // useEffect which gets triggered when Filter or Search change
 
+    // useEffect which gets triggered when Filter or Search change
     useEffect(() => {
-        setPokemonImageSelection([]);
+        setPokemonDetailsFilter([]);
+        setSliderPage(0);
         setLoading(true)
         console.log("newType", pokemonFilters.type.toLowerCase())
-        Promise.all(pokemonImages
+        Promise.all(pokemonDetailsAll
             .map(async (e) => {
                 try {
                     if (e.types[1] && e.types[1].type.name === pokemonFilters.type.toLowerCase() || e.types[0].type.name === pokemonFilters.type.toLowerCase())
-                        setPokemonImageSelection(pokeData => [...pokeData, e])
+                        setPokemonDetailsFilter(pokeData => [...pokeData, e])
+                    console.log("Fillter sollte geklappt haben")
                 } catch (e) { console.log(e) }
             }))
         setLoading(false)
     }, [pokemonFilters.type]);
 
+    // RESET FILTER ???
     // useEffect(() => {
-    //     setPokemonImageSelection([]);
+    //     setPokemonSliderSelection([]);
     //     setLoading(true)
-    //     pokemonImages
+    //     pokemonDetailsAll
     //         .map(async (e) => {
-    //             setPokemonImageSelection(pokeData => [...pokeData, e])
+    //             setPokemonSliderSelection(pokeData => [...pokeData, e])
     //         })
     //     setLoading(false)
     // }, []);
 
+    //SEARCH
     useEffect(() => {
-        setPokemonImageSelection([]);
+        setPokemonSliderSelection([]);
         setLoading(true)
         console.log("newSearch", pokemonFilters.search.toString())
-        pokemonImages
+        pokemonDetailsAll
             .map((e) => {
                 if (e.name === pokemonFilters.search.toLowerCase())
-                    setPokemonImageSelection(pokeData => [...pokeData, e]);
+                    setPokemonDetailsFilter(pokeData => [...pokeData, e]);
             })
+        setLoading(false)
+    }, [pokemonFilters.search]);
+
+    //DYNAMIC SEARCH
+    useEffect(() => {
+        setPokemonSliderSelection([]);
+        setLoading(true)
+        console.log("newSearch", pokemonFilters.search.toString())
+        if (pokemonFilters.search !== "") {
+            const dynamicSearch = pokemonDetailsAll.filter((e) => e.name.toLowerCase().includes(pokemonFilters.search.toString().toLowerCase()));
+            setPokemonDetailsFilter(dynamicSearch)
+        }
         setLoading(false)
     }, [pokemonFilters.search]);
 
@@ -137,20 +137,22 @@ export const ContextProvider = (props) => {
         console.log({
             pokemonData,
             pokemonFromPokeAPI,
-            pokemonImages,
-            pokemonImageSelection,
+            pokemonDetailsAll,
+            pokemonDetailsFilter,
+            pokemonSliderSelection,
             pokemonFilters,
-            backgroundImage,
+            // backgroundImage,
             bgImage,
             reset
         })
     }, [
         pokemonData,
         pokemonFromPokeAPI,
-        pokemonImages,
-        pokemonImageSelection,
+        pokemonDetailsAll,
+        pokemonDetailsFilter,
+        pokemonSliderSelection,
         pokemonFilters,
-        backgroundImage,
+        // backgroundImage,
         bgImage,
         reset]);
 
@@ -163,11 +165,12 @@ export const ContextProvider = (props) => {
                 setPokemonPerSlide,
                 pokemonFilters,
                 setPokemonFilters,
-                backgroundImage,
-                setBackgroundImage,
+                // backgroundImage,
+                // setBackgroundImage,
                 pokemonData, setPokemonData,
-                pokemonImages, setPokemonImages,
-                pokemonImageSelection, setPokemonImageSelection,
+                pokemonDetailsAll, setPokemonDetailsAll,
+                pokemonDetailsFilter, setPokemonDetailsFilter,
+                pokemonSliderSelection, setPokemonSliderSelection,
                 loading, setLoading,
                 reset, setReset,
                 bgImage, setBgImage

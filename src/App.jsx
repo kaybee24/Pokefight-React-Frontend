@@ -16,7 +16,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Hero />}></Route>
-
           </Route>
         </Routes>
       </BrowserRouter >

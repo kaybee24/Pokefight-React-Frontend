@@ -13,13 +13,9 @@ const Layout = () => {
 
     return (
         <>
-            {/* <div className="background-el" style={{ backgroundImage: `url(${bgImage.value})` }}> */}
-
             <Navbar />
             <Slider />
             <Outlet />
-
-            {/* </div> */}
         </>
     )
 }

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../ConnectDB.jsx';
 import './Hero.css';
 import ButtonRumble from './ButtonRumble.jsx';
@@ -7,15 +7,27 @@ import PerformanceUserPoke from './PerformanceUserPoke.jsx';
 
 
 const Hero = () => {
-    const { pokemonData, setPokemonData, pokemonImages, setPokemonImages } = useContext(AppContext)
-    const pokemonRandom = () => {
-        const min = Math.ceil(1)
-        const max = Math.floor(800)
-        return Math.floor(Math.random() * (max - min + 1)) + min
-    }
+    const { pokemonDetailsAll, pokemonSliderSelection, setLoading } = useContext(AppContext)
+    const [randomPokemon, setRandomPokemon] = useState()
+    // const min = Math.ceil(1)
+    // const max = Math.floor(800)
+    // const randomCalc = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // useEffect(() => {
+    //     setLoading(true)
+    //     const min = Math.ceil(1)
+    //     const max = Math.floor(800)
+    //     const randomCalc = Math.floor(Math.random() * (max - min + 1)) + min;
+    //     setRandomPokemon(pokemonDetailsAll[randomCalc])
+    //     setLoading(false)
+    // }, [pokemonSliderSelection])
+
+    console.log("randomPokemon", randomPokemon)
+    // console.log("POKIOKIKO", randomCalc)
 
     return (
         <>
+
             <div className='grid grid-cols-3 absolute bottom-0'>
                 <div className="ml-6 mt-20">
                     <PerformanceUserPoke />
@@ -27,14 +39,15 @@ const Hero = () => {
                         <ButtonInstructions />
                     </div>
                     <div className="flex gap-10 absolute bottom-48">
-                        <div id="pokeUser" className="rounded-full bg-slate-300 border-white border-8 p-14">{pokemonRandom()}</div>
-                        <div id="pokeRival" className="rounded-full bg-slate-300 border-white border-8 p-14"><button>{pokemonRandom()}</button></div>
+                        <div id="pokeUser" className="rounded-full bg-slate-300 border-white border-8 p-4"><img className="w-24 text-center" src="" /></div>
+                        <div id="pokeRival" className="rounded-full bg-slate-300 border-white border-8 p-4"><img className="w-24 text-center" src="" /></div>
                     </div>
                 </div>
                 <div className="absolute right-6 mt-20">
                     <PerformanceUserPoke />
                 </div>
             </div>
+
         </>
     )
 }
