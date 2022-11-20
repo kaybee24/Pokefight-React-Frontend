@@ -3,15 +3,17 @@ import { AppContext } from "../ConnectDB"
 import { useContext } from "react"
 export default function FilterButtons() {
 
-    const { pokemonFilters, setPokemonFilters, setReset } = useContext(AppContext)
+    const { pokemonFilters, setPokemonFilters, setSliderPage, setPokemonDetailsFilter, pokemonDetailsAll } = useContext(AppContext)
 
     function updateType(newType) {
         setPokemonFilters(prev => ({ ...prev, type: newType }))
     }
 
-    // function resetTrigger() {
-    //     setReset(prev => prev + 1)
-    // }
+    function resetTrigger(e) {
+        e.preventDefault()
+        setPokemonDetailsFilter(pokemonDetailsAll)
+        setSliderPage(0)
+    }
 
 
     return (
@@ -20,7 +22,7 @@ export default function FilterButtons() {
             </label>
             <ul className="dropdown-content">
                 {filterablePokemonTypes.map(type => <li><button key={type} onClick={() => updateType(type)}>{type}</button></li>)}
-                {/* <li><button onClick={resetTrigger()}>reset Filter</button></li> */}
+                <button className="btn btn-sm text-sm" onClick={resetTrigger}>reset</button>
             </ul>
         </div>
     )
